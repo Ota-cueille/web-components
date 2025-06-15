@@ -27,7 +27,7 @@ class CMain extends HTMLElement {
         const template = document.getElementById('c-main');
 
         const shadow = this.attachShadow({ mode: 'open' });
-        shadow.appendChild(template.content.cloneNode(true));
+        shadow.appendChild(document.importNode(template.content, true));
     }
 }
 
