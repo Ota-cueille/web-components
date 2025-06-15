@@ -5,21 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <script>
-        async function load(component) {
-            const response = await fetch(`./components/${component}.html`);
-            const content = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(content, "text/html");
-
-            for (const child of doc.head.children) {
-                const clone = document.importNode(child, true);
-                document.body.appendChild(clone);
-            }
-        }
-
-        load("c-main");
-    </script>
+    <script type="module" src="/web-components/components.js"></script>
 </head>
 <body>
     <c-main>
