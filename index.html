@@ -7,15 +7,18 @@
 
     <script>
         async function load(component) {
-            const response = await fetch(`/web-components/components/${component}.html`);
+            const response = await fetch(`./components/${component}.html`);
             const content = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(content, "text/html");
+            const template = doc.querySelector("template");
 
-            document.body.innerHTML = content + document.body.innerHTML;
+            var clone = document.importNode(template.content, true);
+            document.body.appendChild(clone);
         }
 
         load("c-main");
     </script>
-
 </head>
 <body>
     <c-main>
