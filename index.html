@@ -6,9 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <script type="module">
-        import { load } from "/components.js";
-        await load("c-main");
+    <script async>
+        const response = await fetch(`/components/c-main.html`);
+        const content = await response.text();
+
+        document.body.innerHTML += content;
     </script>
 
     <c-main>
