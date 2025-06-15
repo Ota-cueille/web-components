@@ -8,7 +8,7 @@
 <body>
     <script>
         async function load(component) {
-            const response = await fetch(`/components/${component}.html`);
+            const response = await fetch(`/web-components/components/${component}.html`);
             const content = await response.text();
     
             document.body.innerHTML += content;
