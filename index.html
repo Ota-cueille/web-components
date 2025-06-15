@@ -6,11 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <script async>
-        const response = await fetch(`/components/c-main.html`);
-        const content = await response.text();
+    <script>
+        async function load(component) {
+            const response = await fetch(`/components/${component}.html`);
+            const content = await response.text();
+    
+            document.body.innerHTML += content;
+        }
 
-        document.body.innerHTML += content;
+        load("c-main");
     </script>
 
     <c-main>
