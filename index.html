@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
+
     <script>
         async function load(component) {
             const response = await fetch(`/web-components/components/${component}.html`);
             const content = await response.text();
-    
+
             document.body.innerHTML = content + document.body.innerHTML;
         }
 
         load("c-main");
     </script>
 
+</head>
+<body>
     <c-main>
         <h1 slot="title">My Custom Title</h1>
     </c-main>
