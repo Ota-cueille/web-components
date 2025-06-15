@@ -11,7 +11,7 @@
             const response = await fetch(`/web-components/components/${component}.html`);
             const content = await response.text();
     
-            document.body.innerHTML = content + document.body.textContent;
+            document.body.innerHTML = content + document.body.innerHTML;
         }
 
         load("c-main");
