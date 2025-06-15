@@ -11,9 +11,8 @@
             const content = await response.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(content, "text/html");
-            const template = doc.querySelector("template");
 
-            var clone = document.importNode(template.content, true);
+            var clone = document.importNode(doc.body, true);
             document.body.appendChild(clone);
         }
 
