@@ -1,17 +1,6 @@
-// import "./c-main.html";
+export async function load(component) {
+    const response = await fetch(`/components/${component}.html`);
+    const content = await response.text();
 
-class CMain extends HTMLElement {
-    constructor() {
-        super();
-
-        /**
-         * @type HTMLTemplateElement
-         */
-        const template = document.getElementById('c-main');
-
-        const shadow = this.attachShadow({ mode: 'open' });
-        shadow.appendChild(template.content.cloneNode(true));
-    }
+    document.body.innerHTML += content;
 }
-
-customElements.define('c-main', CMain);

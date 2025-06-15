@@ -6,15 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- Components -->
     <script type="module">
-        import "./c-main.html";
-        import "./components.js";
+        import { load } from "/components.js";
+        await load("c-main");
     </script>
-
-    <!-- <script type="module" src="./components.js">
-    </script> -->
-    <!-- Components -->
 
     <c-main>
         <h1 slot="title">My Custom Title</h1>
