@@ -12,10 +12,8 @@
             const parser = new DOMParser();
             const doc = parser.parseFromString(content, "text/html");
 
-            for (let child of doc.children) {
-                var clone = document.importNode(child, true);
-                document.body.appendChild(clone);
-            }
+            var clone = document.importNode(doc.head, true);
+            document.body.appendChild(clone);
         }
 
         load("c-main");
