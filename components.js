@@ -43,4 +43,4 @@ async function load(component) {
     }
 }
 
-load('c-main');
+load('main');
