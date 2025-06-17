@@ -1,8 +1,6 @@
 class Component extends HTMLElement {
 
-    constructor(name, Class) {
-        customElements.define(name, Class);
-
+    constructor(name) {
         /**
          * @type HTMLTemplateElement
          */
@@ -15,7 +13,9 @@ class Component extends HTMLElement {
 
 }
 
-async function load(component) {
+async function load(T, component) {
+    customElements.define(component, T);
+
     const response = await fetch(`/web-components/components/${component}/${component}.html`);
     const content = await response.text();
     const parser = new DOMParser();
@@ -27,6 +27,16 @@ async function load(component) {
     }
 }
 
-load('c-main');
+class CMain extends Component {
+    constructor() {
+        super("c-main", CMain);
 
-import "/web-components/components/main/main.js";
+        const button = this.root.querySelector("button");
+
+        button.onclick = function() {
+            console.log("Button Has been Clicked !");
+        }
+    }
+}
+
+load(CMain, 'c-main');
