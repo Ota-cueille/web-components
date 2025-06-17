@@ -1,8 +1,8 @@
 class Component extends HTMLElement {
 
-    constructor(name) {
-        super();
+    constructor() { super(); }
 
+    initialize(name) {
         /**
          * @type HTMLTemplateElement
          */
@@ -10,35 +10,35 @@ class Component extends HTMLElement {
 
         const shadow = this.attachShadow({ mode: 'open' });
         this.root = document.importNode(template.content, true);
+
+        for (let script of this.root.querySelectorAll('script')) {
+            let evaluatedScript = document.createElement('script');
+            evaluatedScript.src = script.src;
+            evaluatedScript.type = script.type;
+            evaluatedScript.textContent = script.textContent;
+            shadow.appendChild(evaluatedScript);
+        }
+
         shadow.appendChild(this.root);
     }
-
 }
 
-async function load(T, component) {
-    customElements.define(component, T);
-
+async function load(component) {
     const response = await fetch(`/web-components/components/${component}/${component}.html`);
     const content = await response.text();
     const parser = new DOMParser();
-    const doc = parser.parseFromString(content, "text/html");
+    const doc = parser.parseFromString(content, 'text/html');
 
     for (const child of doc.head.children) {
-        const clone = document.importNode(child, true);
-        document.body.appendChild(clone);
-    }
-}
-
-class CMain extends Component {
-    constructor() {
-        super("c-main", CMain);
-
-        const button = this.root.querySelector("button");
-
-        button.onclick = function() {
-            console.log("Button Has been Clicked !");
+        if (child instanceof HTMLScriptElement) {
+            let evaluatedScript = document.createElement('script');
+            evaluatedScript.src = child.src;
+            evaluatedScript.type = child.type;
+            evaluatedScript.textContent = child.textContent;
+            document.body.appendChild(evaluatedScript);
+        } else {
+            const clone = document.importNode(child, true);
+            document.body.appendChild(clone);
         }
     }
 }
-
-load(CMain, 'c-main');

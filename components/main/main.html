@@ -1,7 +1,9 @@
 <template id="c-main">
+    <script src="/web-components/components/main/main.js"></script>
+
     <slot name="title"><h1>Default Header</h1></slot>
     <slot></slot>
-    <button type="button">Click me !!!</button>
+    <button type="button" onclick="hello">Click me !!!</button>
 
     <style>
         button {
@@ -9,3 +11,17 @@
         }
     </style>
 </template>
+
+<script type="module">
+import { Component } from "/web-components/components.js";
+
+class CMain extends Component {
+    constructor() { super(); }
+
+    connectedCallback() {
+        this.initialize('c-main');
+    }
+}
+
+customElements.define('c-main', CMain);
+</script>
