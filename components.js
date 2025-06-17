@@ -13,9 +13,9 @@ class Component extends HTMLElement {
 
         for (let script of this.root.querySelectorAll('script')) {
             let evaluatedScript = document.createElement('script');
-            evaluatedScript.src = script.src;
-            evaluatedScript.type = script.type;
             evaluatedScript.textContent = script.textContent;
+            if (script.src) evaluatedScript.src = script.src;
+            if (script.type) evaluatedScript.type = script.type;
             shadow.appendChild(evaluatedScript);
         }
 
