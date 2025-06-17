@@ -1,6 +1,8 @@
 class Component extends HTMLElement {
 
     constructor(name) {
+        super();
+
         /**
          * @type HTMLTemplateElement
          */
