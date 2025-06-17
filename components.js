@@ -42,3 +42,5 @@ async function load(component) {
         }
     }
 }
+
+load('c-main');
