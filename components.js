@@ -14,8 +14,8 @@ class Component extends HTMLElement {
         for (let script of this.root.querySelectorAll('script')) {
             let evaluatedScript = document.createElement('script');
             evaluatedScript.textContent = script.textContent;
-            if (script.src) evaluatedScript.src = script.src;
-            if (script.type) evaluatedScript.type = script.type;
+            if (script.src.length) evaluatedScript.src = script.src;
+            if (script.type.length) evaluatedScript.type = script.type;
             shadow.appendChild(evaluatedScript);
         }
 
@@ -32,9 +32,9 @@ async function load(component) {
     for (const child of doc.head.children) {
         if (child instanceof HTMLScriptElement) {
             let evaluatedScript = document.createElement('script');
-            evaluatedScript.src = child.src;
-            evaluatedScript.type = child.type;
             evaluatedScript.textContent = child.textContent;
+            if (child.src.length) evaluatedScript.src = child.src;
+            if (child.type.length) evaluatedScript.type = child.type;
             document.body.appendChild(evaluatedScript);
         } else {
             const clone = document.importNode(child, true);
